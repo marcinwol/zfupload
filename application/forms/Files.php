@@ -15,13 +15,8 @@ class My_Form_Files extends Zend_Form {
     public function init() {
         $this->setMethod('post');
         $this->setAttrib('enctype', 'multipart/form-data');
-        $this->setAttrib('target', 'progressFrame');
+        $this->setAttrib('target',  'progressFrame');
         $this->setAttrib('onsubmit', 'beginUpload();');
-        
-        
-        // make required UPLOAD_IDENTIFIER hidden field.
-        $hiddenUploadId = $this->createElement('hidden', 'UPLOAD_IDENTIFIER');
-        $hiddenUploadId->removeDecorator('label');
         
         
         $files = new Zend_Form_Element_File('photo');        
@@ -32,7 +27,7 @@ class My_Form_Files extends Zend_Form {
         // files will be reveived manualy
       //  $files->setValueDisabled(true);
 
-        $this->addElements(array($hiddenUploadId, $files));
+        $this->addElements(array($files));
         
         $this->addElement('submit', 'Submit');        
     }

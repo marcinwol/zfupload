@@ -1,32 +1,30 @@
 <div>
 
     <?php echo $this->form; ?>
-
+    
     <script type="text/javascript">    
         
-        var progress_key = '<?php echo $this->uuid; ?>';
+        var progress_key = $("#progress_key").val();      
         
         function beginUpload() {
            
-            $("#uploadprogressbar").fadeIn();
-           
+            $("#uploadprogressbar").fadeIn();         
 
             var i = setInterval(function() { 
-                $.getJSON("/zfupload/public/index/index/id/" + progress_key, function(data) {
+                $.getJSON("/zfupload/public/index/progress/id/" + progress_key, function(data) {
                     
                     if (data == null) {
-                       // clearInterval(i);
-                       // location.reload(true);
-                    //    return;
+                        clearInterval(i);
+                        location.reload(true);
+                        return;
                     }
 
-                   // var percentage = Math.floor(100 * parseInt(data.bytes_uploaded) / parseInt(data.bytes_total));
-                   
-                    console.log(data);
+                    var percentage = Math.floor(100 * parseInt(data.bytes_uploaded) / parseInt(data.bytes_total));
+                                      
                     
-                  //  $("#uploadprogressbar").progressBar(percentage);
+                    $("#uploadprogressbar").progressBar(percentage);
                 });
-            }, 1000);
+            }, 500);
 
             return true;
         }
