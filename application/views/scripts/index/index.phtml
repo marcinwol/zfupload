@@ -1,0 +1,54 @@
+<div>
+
+    <?php echo $this->form; ?>
+
+    <script type="text/javascript">    
+        
+        var progress_key = '<?php echo $this->uuid; ?>';
+        
+        function beginUpload() {
+           
+            $("#uploadprogressbar").fadeIn();
+           
+
+            var i = setInterval(function() { 
+                $.getJSON("/zfupload/public/index/index/id/" + progress_key, function(data) {
+                    
+                    if (data == null) {
+                       // clearInterval(i);
+                       // location.reload(true);
+                    //    return;
+                    }
+
+                   // var percentage = Math.floor(100 * parseInt(data.bytes_uploaded) / parseInt(data.bytes_total));
+                   
+                    console.log(data);
+                    
+                  //  $("#uploadprogressbar").progressBar(percentage);
+                });
+            }, 1000);
+
+            return true;
+        }
+    </script>
+</script>
+<div>
+    <span class="progressbar" id="uploadprogressbar">0%</span>	
+</div>
+<script type="text/javascript">        
+    var image_base_path = '<?php echo $this->baseUrl(); ?>';
+    
+    $("#uploadprogressbar").progressBar({
+        boxImage: image_base_path + '/images/progressbar.gif',
+        barImage: {
+            0:	image_base_path + '/images/progressbg_red.gif',
+            30: image_base_path + '/images/progressbg_orange.gif',
+            70: image_base_path + '/images/progressbg_green.gif'
+        }
+    }
+);
+</script>
+
+<!-- Ok, you so need this iframe for Safari and Chrome to work, the webkit engine doesnt allow ajax calls to be made after a form begins submission -->
+<iframe style="display: none;" name="progressFrame"></iframe>
+</div>
