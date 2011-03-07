@@ -7,28 +7,54 @@ class IndexController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-      
-        $form = new My_Form_Files();        
 
+        $form = new My_Form_Files();
         $form->setAction($this->view->baseUrl('/index/index'));
 
         if ($this->getRequest()->isPost()) {
             if ($photosForm->isValid($_POST)) {
+                // recive uploaded files
+                
+                if (!$form->files->receive()) {
+                    throw new Zend_Form_Element_Exception('Reciving files');
+                }
+                
                 return;
             }
-        } 
-
+        }
         $this->view->form = $form;
-    
     }
 
     public function progressAction() {
-        $this->_helper->layout->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
 
-        $id = $this->getRequest()->getParam('id');
-        $out = json_encode(uploadprogress_get_info($id));
-        echo $out;
+        // check if a request is an ajax request
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            return;
+        }
+
+        $uploadId = $this->getRequest()->getParam('id');
+
+        $data = uploadprogress_get_info($uploadId);
+        
+        $bytesTotal = $bytesUploaded = 0;
+        
+        if (null !== data) {
+            $bytesTotal    = $data['bytes_total'];
+            $bytesUploaded = $data['bytes_uploaded'];
+        }        
+        
+        $adapter = new Zend_ProgressBar_Adapter_JsPull();
+        $progressBar = new Zend_ProgressBar($adapter, 0, $bytesTotal, 'uploadProgress');
+
+        if ($bytesTotal === $bytesUploaded) {
+            $progressBar->finish();
+        } else {
+            $progressBar->update($bytesUploaded);
+        }
+    }
+    
+    public function successAction() {
+        
     }
 
 }

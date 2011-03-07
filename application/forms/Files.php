@@ -6,7 +6,7 @@
  */
 
 /**
- * DForm for uploading files.
+ * Form for uploading files.
  *
  * @author marcin
  */
@@ -14,21 +14,21 @@ class My_Form_Files extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
+        
+        // set form attributes
         $this->setAttrib('enctype', 'multipart/form-data');
-        $this->setAttrib('target',  'progressFrame');
-        $this->setAttrib('onsubmit', 'beginUpload();');
+        $this->setAttrib('target',  'progressFrame');                
+        $this->setAttrib('id', 'files-upload-form');       
         
-        
-        $files = new Zend_Form_Element_File('photo');        
+        // create multiple file element
+        $files = new Zend_Form_Element_File('files');        
         $files->setLabel('Upload files: ');
-        $files->setDestination(APPLICATION_PATH . '/uploads');
+        $files->setDestination(UPLOAD_PATH);
         $files->setMultiFile(3);
+        $files->setValueDisabled(true);
+        $this->addElements(array($files));       
 
-        // files will be reveived manualy
-      //  $files->setValueDisabled(true);
-
-        $this->addElements(array($files));
-        
+        // add submit button        
         $this->addElement('submit', 'Submit');        
     }
 
