@@ -27,18 +27,19 @@ class IndexController extends Zend_Controller_Action {
 
     public function progressAction() {
 
-        // check if a request is an ajax request
+        // check if a request is an AJAX request
         if (!$this->getRequest()->isXmlHttpRequest()) {
-            return;
+            throw new Zend_Controller_Request_Exception('Not an AJAX request detected');
         }
 
         $uploadId = $this->getRequest()->getParam('id');
 
+        // this is the function that actually reads the status of uploading
         $data = uploadprogress_get_info($uploadId);
         
         $bytesTotal = $bytesUploaded = 0;
         
-        if (null !== data) {
+        if (null !== $data) {
             $bytesTotal    = $data['bytes_total'];
             $bytesUploaded = $data['bytes_uploaded'];
         }        

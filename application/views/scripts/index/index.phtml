@@ -29,9 +29,9 @@
             $("#uploadprogressbar").fadeIn();         
 
 
-            // make repeated ajax requests to 'progress_action'
+            // make repeated AJAX requests to 'progress_action'
             // to get current status of upload progress
-            // Dont forget to sent a progress_key with each ajax request
+            // Dont forget to sent a progress_key with each AJAX request
             var i = setInterval(function() { 
                 $.ajax({
                     url:  progress_action + "/id/" + progress_key,
@@ -39,7 +39,7 @@
                     dataType: 'json',
                     success: function(data) {
                         
-                        // when upload finishes than stop ajax calls 
+                        // when upload finishes than stop AJAX calls 
                         // and redirect index/success action
                         if (true == data.finished) {
                             clearInterval(i);
@@ -59,6 +59,7 @@
     </script>
 </script>
 <div>
+    <!-- here the progress bar is going to be shown -->
     <span class="progressbar" id="uploadprogressbar" style>0%</span>	
 </div>
 <script type="text/javascript">    
@@ -77,6 +78,8 @@
 );
 </script>
 
-<!-- Ok, you so need this iframe for Safari and Chrome to work, the webkit engine doesnt allow ajax calls to be made after a form begins submission -->
+<!-- Ok, you so need this iframe for Safari and Chrome to work, 
+the webkit engine doesnt allow ajax calls to be made after 
+a form begins submission -->
 <iframe style="display: none;" name="progressFrame"></iframe>
 </div>
