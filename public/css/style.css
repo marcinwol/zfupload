@@ -19,3 +19,25 @@
     border-bottom-color: #b5b5b5;
     border-top-color: #b5b5b5;
 }
+
+#footer{
+    
+    font-size: 10px;
+    color: #b9b9b9;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    border-top-style: dashed;
+    border-top-width: 1px;
+    padding-top: 5px;
+     text-align: right;
+    margin-top: 100px;
+}
+
+#footer a  {
+
+    color: #b9b9b9;
+    text-decoration: none;
+   
+}
+#footer a:hover  {
+    text-decoration: underline;
+}
