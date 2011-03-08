@@ -23,7 +23,7 @@ class My_Form_Files extends Zend_Form {
         // create multiple file element
         $files = new Zend_Form_Element_File('files');        
         $files->setLabel('Upload files: ');        
-        $files->setDestination(UPLOAD_PATH);
+        $files->setDestination(UPLOAD_PATH);     
         $files->setMultiFile(3);
         
         // set this flag for manual reception of uploaded files

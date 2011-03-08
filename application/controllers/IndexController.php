@@ -8,10 +8,12 @@ class IndexController extends Zend_Controller_Action {
 
     /**
      * After submision of My_Form_Files, the output of this action 
-     * (its view and layout) will go to the invisible progressFrame iframe defined
-     * in index.php (this frame is needed for minitoring upload progress). This
-     * means that any exceptions or errors thrown here wont be visible. So
-     *  
+     * (its view and layout) will go to the  progressFrame iframe defined
+     * in index.phtml (this frame is needed for minitoring upload progress). This 
+     * causes a lot of troubles as for example any exceptions or form validations
+     * errors will be shown in the iframe rather than in the 'normal' window.
+     * 
+     * So this must be considered when doing ajax file uploads.
      * 
      */
     public function indexAction() {
@@ -48,13 +50,14 @@ class IndexController extends Zend_Controller_Action {
                         throw new Exception('Cannot remove file: ' . $file);
                     }                    
                 }      
+                 
                 
+                // everything whent fine so go to success action  
+                // this script is executed inside the iframe.
+                echo '<script>window.top.location.href = "'.$this->view->baseUrl().'/index/success'.'";</script>';               
+                exit;
                 
-                // everything whent fine so go to success action                              
-                echo '<script>window.top.location.href = "'.$this->view->baseUrl().'/index/success'.'";</script>';
-                return ;
-                
-            }
+            } 
         }
         $form->setAction($this->view->baseUrl('/index/index'));
         $this->view->form = $form;

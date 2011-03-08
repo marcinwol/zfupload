@@ -6,7 +6,19 @@
         
         // when form is submitted, execut monitorUpload function
         $("#files-upload-form").bind('submit', function () {
-            monitorUpload();
+            
+            var filesSelected = false;
+            
+            // monitor upload progress only when some files were selected for upload
+            $('input[type=file]').each(function(){                
+                if ($(this).val()) {       
+                    filesSelected = true;                    
+                }                
+            });
+            
+            if (filesSelected) {
+                monitorUpload();
+            }
         });
                    
         
