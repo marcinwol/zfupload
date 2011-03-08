@@ -17,7 +17,7 @@
  * @subpackage Table
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 21078 2010-02-18 18:07:16Z tech13 $
+ * @version    $Id: Abstract.php 23657 2011-01-22 16:01:47Z ralph $
  */
 
 /**
@@ -807,12 +807,23 @@ abstract class Zend_Db_Table_Abstract
             //get db configuration
             $dbConfig = $this->_db->getConfig();
 
+            $port = isset($dbConfig['options']['port'])
+                  ? ':'.$dbConfig['options']['port']
+                  : (isset($dbConfig['port'])
+                  ? ':'.$dbConfig['port']
+                  : null);
+
+            $host = isset($dbConfig['options']['host'])
+                  ? ':'.$dbConfig['options']['host']
+                  : (isset($dbConfig['host'])
+                  ? ':'.$dbConfig['host']
+                  : null);
+
             // Define the cache identifier where the metadata are saved
             $cacheId = md5( // port:host/dbname:schema.table (based on availabilty)
-                (isset($dbConfig['options']['port']) ? ':'.$dbConfig['options']['port'] : null)
-                . (isset($dbConfig['options']['host']) ? ':'.$dbConfig['options']['host'] : null)
-                . '/'.$dbConfig['dbname'].':'.$this->_schema.'.'.$this->_name
-                );
+                    $port . $host . '/'. $dbConfig['dbname'] . ':'
+                  . $this->_schema. '.' . $this->_name
+            );
         }
 
         // If $this has no metadata cache or metadata cache misses
@@ -961,7 +972,7 @@ abstract class Zend_Db_Table_Abstract
      * You can elect to return only a part of this information by supplying its key name,
      * otherwise all information is returned as an array.
      *
-     * @param  $key The specific info part to return OPTIONAL
+     * @param  string $key The specific info part to return OPTIONAL
      * @return mixed
      */
     public function info($key = null)
@@ -1035,14 +1046,24 @@ abstract class Zend_Db_Table_Abstract
          */
         if (is_string($this->_sequence) && !isset($data[$pkIdentity])) {
             $data[$pkIdentity] = $this->_db->nextSequenceId($this->_sequence);
+            $pkSuppliedBySequence = true;
         }
 
         /**
          * If the primary key can be generated automatically, and no value was
          * specified in the user-supplied data, then omit it from the tuple.
+         * 
+         * Note: this checks for sensible values in the supplied primary key
+         * position of the data.  The following values are considered empty:
+         *   null, false, true, '', array()
          */
-        if (array_key_exists($pkIdentity, $data) && $data[$pkIdentity] === null) {
-            unset($data[$pkIdentity]);
+        if (!isset($pkSuppliedBySequence) && array_key_exists($pkIdentity, $data)) {
+            if ($data[$pkIdentity] === null                                        // null
+                || $data[$pkIdentity] === ''                                       // empty string
+                || is_bool($data[$pkIdentity])                                     // boolean
+                || (is_array($data[$pkIdentity]) && empty($data[$pkIdentity]))) {  // empty array
+                unset($data[$pkIdentity]);
+            }
         }
 
         /**
