@@ -1,8 +1,6 @@
 /tests/log
 /nbproject
-/library/Zend
 /application/uploads
-/application/configs/appkeys.ini
 /tmp
 /.zfproject.xml
 *.bak
