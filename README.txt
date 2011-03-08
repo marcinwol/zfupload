@@ -1,8 +1,9 @@
 ABOUT
 ======
 
-Example application demonstrating usage of Zend_ProgressBar and jquery.progressbar
-for monitoring progress of file uploads in Zend Framework 1.11.3.
+Example Zend Framework application demonstrating usage of Zend_ProgressBar 
+and jquery progressbar (http://t.wits.sg/jquery-progress-bar/) for 
+monitoring progress of file uploads in Zend Framework 1.11.3.
 
 
 INSTALATION
@@ -21,5 +22,6 @@ upload progress.
 
 DEMO
 ====
+
 The demo of this application is at:
 http://www.mwol.born2die.eu/zfupload/public
