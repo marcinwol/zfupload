@@ -43,7 +43,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     
     protected function _initCheckIfUploadProgressGetInfoExists() {
           if (!function_exists('uploadprogress_get_info')) {
-              throw new Exception('Function \'uploadprogress_get_info\' does not exist');
+              throw new Exception('Function \'uploadprogress_get_info\' does not exist. PECL package "uploadprogress" needed.');
           }            
         
     }

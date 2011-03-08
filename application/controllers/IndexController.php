@@ -15,10 +15,7 @@ class IndexController extends Zend_Controller_Action {
      * 
      */
     public function indexAction() {
-        
-        
-          
-
+                
         $form = new My_Form_Files();
 
         if ($this->getRequest()->isPost()) {
