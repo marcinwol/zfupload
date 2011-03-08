@@ -21,8 +21,7 @@ class My_Form_Files extends Zend_Form {
         $this->setAttrib('id', 'files-upload-form');       
         
         // create multiple file element
-        $files = new Zend_Form_Element_File('files');        
-        $files->setLabel('Upload files: ');        
+        $files = new Zend_Form_Element_File('files');                      
         $files->setDestination(UPLOAD_PATH);     
         $files->setMultiFile(3);
         
@@ -32,7 +31,7 @@ class My_Form_Files extends Zend_Form {
         $this->addElements(array($files));       
 
         // add submit button        
-        $this->addElement('submit', 'Submit');        
+        $this->addElement('submit', 'Upload');        
     }
 
     
