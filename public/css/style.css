@@ -1,3 +1,21 @@
  #uploadprogressbar { 
      display: none; 
  }
+ 
+ #progressiFrame {
+     width: 100%;
+     border: 1px;
+     background-color: #f8f8f8;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-bottom-style: solid;
+    border-top-style: solid;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-bottom-width: 1px;
+    border-top-width: 1px;
+    border-right-color: #b5b5b5;
+    border-left-color: #b5b5b5;
+    border-bottom-color: #b5b5b5;
+    border-top-color: #b5b5b5;
+}

@@ -20,24 +20,39 @@ class IndexController extends Zend_Controller_Action {
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($_POST)) {
-
+                
+                $this->_helper->layout->disableLayout();
+                $this->_helper->viewRenderer->setNoRender(true);
+                                
+                
                 if (!$form->files->receive()) {
                     throw new Zend_File_Transfer_Exception('Reciving files failed');
-                }
+                }               
                 
                 $uploadedFilesPaths = $form->files->getFileName();
+                
+                if(empty($uploadedFilesPaths)) {
+                     $this->view->message = "No files uploaded";
+                     return $this->render('finish');
+                }
+                
+                // single uploaded file will not be an array. So make it to array.
+                if (!is_array($uploadedFilesPaths)) {                    
+                    $uploadedFilesPaths = (array) $uploadedFilesPaths;
+                }
+                
                 
                 // because this is only a demo so immidiately remove the files
                 foreach ($uploadedFilesPaths as $file) {
                     if (!unlink($file)) {
                         throw new Exception('Cannot remove file: ' . $file);
                     }                    
-                }
+                }      
                 
-                throw new Exception('Cannot remove file: ' . $file);
                 
-                // everything whent fine so go to success action
-                $this->_redirect('index/success');
+                // everything whent fine so go to success action                              
+                echo '<script>window.top.location.href = "'.$this->view->baseUrl().'/index/success'.'";</script>';
+                return ;
                 
             }
         }
@@ -75,7 +90,7 @@ class IndexController extends Zend_Controller_Action {
     }
 
     public function successAction() {
-        
+  
     }
 
 }

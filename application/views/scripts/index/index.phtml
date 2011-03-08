@@ -43,8 +43,8 @@
                         // and redirect index/success action
                         if (true == data.finished) {
                             clearInterval(i);
-                            checkContentInIFrame();
-                            //location.href = success_action ;
+                            $("#uploadprogressbar").progressBar(100);
+                           // location.href = success_action ;
                             return;
                         }
                   
@@ -55,13 +55,10 @@
                         // do nothing 
                     }
                 });
+            return;    
             }, 1000);
         }
         
-        function checkContentInIFrame() {
-            console.log($("#progressiFrame").contents());
-            document.body.innerHTML= $("#progressiFrame").contents().first();
-        }
         
     </script>
 </script>
