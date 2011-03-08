@@ -7,8 +7,10 @@
         <?php
         // add csss, jquery and jquery.progressbar
         $this->headLink()->appendStylesheet($this->baseUrl('/css/style.css'));
+        $this->headLink()->appendStylesheet($this->baseUrl('/css/uniform.default.css'));
         $this->headScript()->appendFile($this->baseUrl('/js/jquery-1.4.4.min.js'));
         $this->headScript()->appendFile($this->baseUrl('/js/jquery.progressbar.js'));
+ $this->headScript()->appendFile($this->baseUrl('/js/jquery.uniform.min.js'));
 
         echo $this->headLink();
         echo $this->headScript();

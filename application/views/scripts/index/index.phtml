@@ -3,6 +3,8 @@
     <?php echo $this->form; ?>
 
     <script type="text/javascript">   
+
+	$("input:file, input:submit").uniform();
         
         // when form is submitted, execut monitorUpload function
         $("#files-upload-form").bind('submit', function () {
