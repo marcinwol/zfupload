@@ -2,9 +2,7 @@
 
 class IndexController extends Zend_Controller_Action {
 
-    public function init() {
-        /* Initialize action controller here */
-    }
+   
 
     /**
      * After submision of My_Form_Files, the output of this action 
@@ -13,7 +11,7 @@ class IndexController extends Zend_Controller_Action {
      * causes a lot of troubles as for example any exceptions or form validations
      * errors will be shown in the iframe rather than in the 'normal' window.
      * 
-     * So this must be considered when doing ajax file uploads.
+     * So this must be considered when doing AJAX file uploads.
      * 
      */
     public function indexAction() {
@@ -52,7 +50,7 @@ class IndexController extends Zend_Controller_Action {
                 }      
                  
                 
-                // everything whent fine so go to success action  
+                // everything went fine so go to success action  
                 // this script is executed inside the iframe.
                 echo '<script>window.top.location.href = "'.$this->view->baseUrl().'/index/success'.'";</script>';               
                 exit;

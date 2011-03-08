@@ -10,6 +10,7 @@
             var filesSelected = false;
             
             // monitor upload progress only when some files were selected for upload
+            // not only when submit button was clicked
             $('input[type=file]').each(function(){                
                 if ($(this).val()) {       
                     filesSelected = true;                    
@@ -55,8 +56,7 @@
                         // and redirect index/success action
                         if (true == data.finished) {
                             clearInterval(i);
-                            $("#uploadprogressbar").progressBar(100);
-                           // location.href = success_action ;
+                            $("#uploadprogressbar").progressBar(100);                          
                             return;
                         }
                   
