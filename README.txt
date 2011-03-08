@@ -20,8 +20,3 @@ since it uses 'uploadprogress_get_info' function for getting the information abo
 upload progress. 
 
 
-DEMO
-====
-
-The demo of this application is at:
-http://www.mwol.born2die.eu/zfupload/public
