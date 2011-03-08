@@ -21,7 +21,7 @@
             // indicatate which controller/action will be used to get upload progress data
             var progress_action = "<?php echo $this->baseUrl('/index/progress'); ?>";              
         
-            // ????
+            // where should we go after successful upload
             var success_action  = "<?php echo $this->baseUrl('/index/success'); ?>";  
             
            
@@ -43,7 +43,8 @@
                         // and redirect index/success action
                         if (true == data.finished) {
                             clearInterval(i);
-                            // location.href = success_action ;
+                            checkContentInIFrame();
+                            //location.href = success_action ;
                             return;
                         }
                   
@@ -54,8 +55,14 @@
                         // do nothing 
                     }
                 });
-            }, 500);
+            }, 1000);
         }
+        
+        function checkContentInIFrame() {
+            console.log($("#progressiFrame").contents());
+            document.body.innerHTML= $("#progressiFrame").contents().first();
+        }
+        
     </script>
 </script>
 <div>
@@ -81,5 +88,5 @@
 <!-- Ok, you so need this iframe for Safari and Chrome to work, 
 the webkit engine doesnt allow ajax calls to be made after 
 a form begins submission -->
-<iframe style="display: none;" name="progressFrame"></iframe>
+<iframe style="display: block;" name="progressFrame" id="progressiFrame"></iframe>
 </div>

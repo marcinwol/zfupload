@@ -40,6 +40,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // if $uploadPath was created than define a constant
         defined('UPLOAD_PATH') || define('UPLOAD_PATH', APPLICATION_PATH . '/uploads');
     }
+    
+    protected function _initCheckIfUploadProgressGetInfoExists() {
+          if (!function_exists('uploadprogress_get_info')) {
+              throw new Exception('Function \'uploadprogress_get_info\' does not exist');
+          }            
+        
+    }
 
 }
 
