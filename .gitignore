@@ -1,15 +1,9 @@
-tests/log
-nbproject
-library/Zend
-library/ZendX
-library/openid-php
-application/resources
+/tests/log
+/nbproject
 /application/uploads
-/application/configs/appkeys.ini
 /tmp
 /.zfproject.xml
 *.bak
-public/images
 *.orig
 /application/forms/Decorator/.LCKCaptcha.php~
 /application/forms/Element/.LCKCaptcha.php~
