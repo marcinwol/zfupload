@@ -57,7 +57,12 @@ class IndexController extends Zend_Controller_Action {
                 
             } 
         }
+        
         $form->setAction($this->view->baseUrl('/index/index'));
+        
+        $this->view->maxUploadFileSize = ini_get('upload_max_filesize');
+        $this->view->postMaxSize = ini_get('post_max_size');
+        
         $this->view->form = $form;
     }
 

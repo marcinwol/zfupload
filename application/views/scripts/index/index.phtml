@@ -1,6 +1,12 @@
 <div>
 
     <?php echo $this->form; ?>
+    <div class="upload-info">
+        <p>
+            Max upload file size <?php echo $this->maxUploadFileSize; ?> |       
+            Max POST size <?php echo $this->postMaxSize; ?>
+        </p>
+    </div>
 
     <script type="text/javascript">   
         // make the form nicer
