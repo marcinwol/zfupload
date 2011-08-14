@@ -12,7 +12,7 @@
         // make the form nicer
 	$("input").uniform();
         
-        // when form is submitted, execut monitorUpload function
+        // when form is submitted, execute monitorUpload function
         $("#files-upload-form").bind('submit', function () {
             
             var filesSelected = false;
@@ -103,7 +103,7 @@
 </script>
 
 <!-- Ok, you so need this iframe for Safari and Chrome to work, 
-the webkit engine doesnt allow ajax calls to be made after 
+the webkit engine doesn't allow ajax calls to be made after 
 a form begins submission -->
 <iframe style="display: block;" name="progressFrame" id="progressiFrame"></iframe>
 </div>
